@@ -1,0 +1,653 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# User-Defined Functions & Scoping"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Tasks Today:\n",
+    "\n",
+    "\n",
+    "1) Functions <br>\n",
+    " &nbsp;&nbsp;&nbsp;&nbsp; a) User-Defined vs. Built-In Functions <br>\n",
+    " &nbsp;&nbsp;&nbsp;&nbsp; b) Accepting Parameters <br>\n",
+    " &nbsp;&nbsp;&nbsp;&nbsp; c) Default Parameters <br>\n",
+    " &nbsp;&nbsp;&nbsp;&nbsp; d) Making an Argument Optional <br>\n",
+    " &nbsp;&nbsp;&nbsp;&nbsp; e) Keyword Arguments <br>\n",
+    " &nbsp;&nbsp;&nbsp;&nbsp; f) Returning Values <br>\n",
+    " &nbsp;&nbsp;&nbsp;&nbsp; g) *args <br>\n",
+    " &nbsp;&nbsp;&nbsp;&nbsp; h) Docstring <br>\n",
+    " &nbsp;&nbsp;&nbsp;&nbsp; i) Using a User Function in a Loop <br>\n",
+    "2) Scope\n",
+    "3) Creating more User-Defined functions "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "\n",
+    "## Functions"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "##### User-Defined vs. Built-In Functions"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Built-in Functions\n",
+    "print('Hello')\n",
+    "#User-defined function\n",
+    "def sayHello():\n",
+    "    return \"Hello World from Coding Temple\"\n",
+    "\n",
+    "print(sayHello())"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "##### Accepting Parameters"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [],
+   "source": [
+    "# Order always matters! Parameters are based on order\n",
+    "# Pass any type of variable into a function as a parameter(strings, integers, floats, booleans, lists, dictionaries, etc.)\n",
+    "\n",
+    "def print_full_name(first_name, last_name):\n",
+    "    return f\"Hi my last name is {last_name}, and my first name is {first_name}\"\n",
+    "\n",
+    "print(print_full_name('Tarun', 'Patel'))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "##### Default Parameters"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Default parameters MUST come after non-default parameters at ALL TIMES......or else\n",
+    "\n",
+    "def agent_name(first_name, last_name = 'Bond'):\n",
+    "    return f\"The name is {last_name}.....{first_name} {last_name}\"\n",
+    "\n",
+    "print(agent_name('James'))\n",
+    "\n",
+    "print(agent_name('James', 'and the Giant Peach'))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def oct_birthday(day, year, month = 'October'):\n",
+    "    return f\"Your birthday is the {day} day of {month} and you were born in {year}.\"\n",
+    "print(oct_birthday(\"11th\", 1980))\n",
+    "print(oct_birthday(\"21st\", 1980, \"September\"))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "##### Making an Argument Optional"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def print_horse_name(first, middle = '', last = 'Ed'):\n",
+    "    return f\"Hello my name is {first} {middle} {last} and I am a pretty cool horse.... naaaay.\"\n",
+    "\n",
+    "print(print_horse_name('Mr.'))\n",
+    "print(print_horse_name('Mrs.', 'Sea Biscuit'))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "##### Keyword Arguments"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def print_hero(name, power = 'invisible'):\n",
+    "    return f\"{name}'s power is {power}\"\n",
+    "\n",
+    "print(print_hero('Harry Potter'))\n",
+    "print(print_hero(power = 'flying', name = 'Superman'))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Create a function (or more than one) that accepts positional, default, and optional arguments.\n",
+    "\n",
+    "def location(city, county = '', state = 'Illinois'):\n",
+    "    return f\"I live in {city}, {county}, {state}\"\n",
+    "\n",
+    "print(location(\"Chicago\", \"Cook\", \"Illinois\"))\n",
+    "print(location(\"Springfield\"))\n",
+    "print(location(\"Los Angeles\", \"\", \"California\"))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Creating a start, stop, step function"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def my_range(stop, start = 0, step = 1):\n",
+    "    \n",
+    "    for i in range(start, stop, step):\n",
+    "        print(i)\n",
+    "\n",
+    "my_range(10)\n",
+    "print(\"\\n\")\n",
+    "my_range(10, 2, 2)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "##### Returning Values "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def add_nums(num1, num2):\n",
+    "    return num1 + num2\n",
+    "\n",
+    "print(add_nums(50, 50))\n",
+    "add_nums(56, 44)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "##### *args / **kwargs (keyword arguments)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# *args stands for arguments, **kwargs stands for keyword arguments\n",
+    "# & they can take any number of arguments & keyword arguments\n",
+    "# must be last if they are present\n",
+    "\n",
+    "def print_args_kwargs(num1, num2, *args, **kwargs):\n",
+    "    print(f\"These are our positional arguments: {num1} {num2}\")\n",
+    "    print(f\"These are our args: {args}\")\n",
+    "    print(f\"These are our kwargs: {kwargs}\")\n",
+    "\n",
+    "print_args_kwargs(2, 10, \"megazord\", 'katie', names = ['Alex', 'Perry', 'Kelsey'], subject = 'Python')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [],
+   "source": [
+    "def cars(year, *make, **model):\n",
+    "    print(f\"Positional: {year}\")\n",
+    "    print(f\"Args: {make}\")\n",
+    "    print(f\"Kwargs: {model}\")\n",
+    "          \n",
+    "cars(2023, 'Audi', 'BMW', 'Mercedes', ModelsAudi = ['A4', 'A6', 'A8'], ModelsBMW = ['3 series', '5 series', '7 series'], ModelsMercedes = ['GLC', 'GLE'])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def halloween_time(season, *fun_things, **fav_movies):\n",
+    "    print(\"This is my positional argument: \")\n",
+    "    print(f\"my fav time of year is {season}\\n\")\n",
+    "    \n",
+    "    print(\"These are my *args\")\n",
+    "    print(\"These are the things I like to do: \")\n",
+    "    \n",
+    "    for things in fun_things:\n",
+    "        print(things)\n",
+    "        \n",
+    "    print(\"\\nThese are my kwargs: \")\n",
+    "    print(\"These are my fav spooky movies: \")\n",
+    "    \n",
+    "    for key, value in fav_movies.items():\n",
+    "        print(f\"Genre is {key}\")\n",
+    "        print(f\"Movie is {value}\")\n",
+    "    \n",
+    "halloween_time('Fall', 'pumpkin patches', 'hiking', 'carve pumpkins', 'corn mazes', possession = 'The Conjuring', gore = 'Saw', animatedish = 'Nightmare Before Christmas')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "##### Docstring"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# docstring is giving some information about the function\n",
+    "\n",
+    "def print_names(arr):\n",
+    "    \n",
+    "    \"\"\"\n",
+    "    The print_names() function requires a list to be passed as a paramater and will\n",
+    "    print the contents of thel ist. It is expecting a lsit of strings to be passed into it\n",
+    "    \"\"\"\n",
+    "    \n",
+    "    for name in arr:\n",
+    "        print(name)\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(print_names)\n",
+    "print_names(['Chris', 'Perry', 'Teddie', 'Katie'])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "##### Using a User Function in a Loop"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def print_input(answer):\n",
+    "    print(f\"Your answer is {answer}\")\n",
+    "\n",
+    "while True:\n",
+    "    ask = input(\"What do you want to do today? \")\n",
+    "    \n",
+    "    print_input(ask)\n",
+    "    \n",
+    "    response = input(\"Do you want to quit? \")\n",
+    "    if response.lower().strip() == 'yes':\n",
+    "        break"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# helper functions are another function that performms a task within another loop or function.\n",
+    "# Used a lot when that particular utility needs to be used multiple times.\n",
+    "\n",
+    "def times_two(num):\n",
+    "    return num * 2\n",
+    "\n",
+    "def my_range(stop, start, step = 1):\n",
+    "    for i in range(6):\n",
+    "        print(f\"This is our num: {i}\")\n",
+    "        print(f\"This is our multiplication of num: {times_two(i)}\")\n",
+    "    \n",
+    "my_range(6,1)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Function Exercises <br>\n",
+    "### Exercise 1\n",
+    "<p>Write a function that loops through a list of first_names and a list of last_names, combines the two and return a list of full_names</p>"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "first_name = ['John', 'Evan', 'Jordan', 'Max']\n",
+    "last_name = ['Smith', 'Smith', 'Williams', 'Bell']\n",
+    "\n",
+    "# Output: ['John Smith', 'Evan Smith', 'Jordan Williams', 'Max Bell']\n",
+    "\n",
+    "def full_names(first, last):\n",
+    "    \"\"\"\n",
+    "    Our function full_names is going to be combing the first & last names together and return full names\n",
+    "    \"\"\"\n",
+    "    \n",
+    "    return (first + \" \" + last).title()\n",
+    "\n",
+    "def names(first_name, last_name):\n",
+    "    \n",
+    "    fulls = []\n",
+    "    \n",
+    "    for i in range(len(first_name)):\n",
+    "        whole_name = full_names(first_name[i], last_name[i])\n",
+    "        fulls.append(whole_name)\n",
+    "        \n",
+    "    return fulls\n",
+    "names(first_name, last_name)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Exercise 2\n",
+    "Create a function that alters all values in the given list by subtracting 5 and then doubling them."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "input_list = [5,10,15,20,3]\n",
+    "# output = [0,10,20,30,-4]\n",
+    "\n",
+    "def sub5_dubs(i):\n",
+    "    \n",
+    "    return int((i-5)*2)\n",
+    "\n",
+    "def input_list_modified(input_list):\n",
+    "    \n",
+    "    subdubs = []\n",
+    "\n",
+    "    for i in range(len(input_list)):\n",
+    "        subdub = sub5_dubs(input_list[i])\n",
+    "        subdubs.append(subdub)\n",
+    "\n",
+    "    return subdubs\n",
+    "\n",
+    "input_list_modified(input_list)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Exercise 3\n",
+    "Create a function that takes in a list of strings and filters out the strings that DO NOT contain vowels. "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "string_list = ['Sheldon','Pnny','Leonard','Hwrd','Rj','Amy','Strt']\n",
+    "# output = ['Sheldon','Leonard','Amy']\n",
+    "\n",
+    "def have_vowels(name):\n",
+    "    \n",
+    "    name_vowels = []\n",
+    "    \n",
+    "    vowels = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']\n",
+    "    \n",
+    "    for name in string_list:\n",
+    "        if any(vowel in name for vowel in vowels):\n",
+    "            name_vowels.append(name)\n",
+    "    return name_vowels\n",
+    "\n",
+    "have_vowels(string_list)\n",
+    "            "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Exercise 4\n",
+    "Create a function that accepts a list as a parameter and returns a dictionary containing the list items as it's keys, and the number of times they appear in the list as the values"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "example_list = [\"Harry\", 'Hermione','Harry','Ron','Dobby','Draco','Luna','Harry','Hermione','Ron','Ron','Ron']\n",
+    "\n",
+    "# output = {\n",
+    "#     \"Harry\":3,\n",
+    "#     \"Hermione\":2,\n",
+    "#     \"Ron\":4,\n",
+    "#     \"Dobby\":1,\n",
+    "#     \"Draco\":1,\n",
+    "#     \"Luna\": 1\n",
+    "# }\n",
+    "\n",
+    "\n",
+    "def frequency_list(list1):\n",
+    "    \n",
+    "    frequency_dict = {}\n",
+    "    \n",
+    "    for name in list1:\n",
+    "        if name in frequency_dict:\n",
+    "            frequency_dict[name] += 1\n",
+    "        else:\n",
+    "            frequency_dict[name] = 1\n",
+    "    \n",
+    "    return frequency_dict\n",
+    "    \n",
+    "frequency_list(example_list)\n",
+    "    \n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "\n",
+    "\n",
+    "## Scope <br>\n",
+    "<p>Scope refers to the ability to access variables, different types of scope include:<br>a) Global<br>b) Function (local)<br>c) Class (local)</p>"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# placement of variable declaration matters\n",
+    "\n",
+    "number = 3 # Gloal Variable\n",
+    "\n",
+    "def myFunc():\n",
+    "    num_3 = 6 # Local Function Variable\n",
+    "    return num_3\n",
+    "\n",
+    "print(number)\n",
+    "# print(num_3)\n",
+    "\n",
+    "# calling a function\n",
+    "print(myFunc())\n",
+    "\n",
+    "# storing a function call at a variable\n",
+    "return_num = myFunc()\n",
+    "print(return_num)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Homework Exercises"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Exercise 1 <br>\n",
+    "<p>Given a list as a parameter,write a function that returns a list of numbers that are less than ten</b></i></p><br>\n",
+    "<p> For example: Say your input parameter to the function is [1,11,14,5,8,9]...Your output should [1,5,8,9]</p>"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Use the following list - [1,11,14,5,8,9]\n",
+    "\n",
+    "l_1 = [1,11,14,5,8,9]\n",
+    "\n",
+    "def num_under_ten(list1):\n",
+    "    \n",
+    "    list_under_ten = []\n",
+    "    \n",
+    "    for num in list1:\n",
+    "        if num < 10:\n",
+    "            list_under_ten.append(num)\n",
+    "            \n",
+    "    return list_under_ten\n",
+    "    \n",
+    "num_under_ten(l_1)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Exercise 2 <br>\n",
+    "<p>Write a function that takes in two lists and returns the two lists merged together and sorted<br>\n",
+    "<b><i>Hint: You can use the .sort() method</i></b></p>"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[1, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 8, 10]"
+      ]
+     },
+     "execution_count": 7,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "l_1 = [1,2,3,4,5,6]\n",
+    "l_2 = [3,4,5,6,7,8,10]\n",
+    "\n",
+    "def list_comb(list1, list2):\n",
+    "    \n",
+    "    list3 = list1 + list2\n",
+    "    list3.sort()\n",
+    "    \n",
+    "    return list3\n",
+    "\n",
+    "list_comb(l_1, l_2)"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.10.7"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
